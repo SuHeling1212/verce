@@ -1,4 +1,4 @@
-package com.follarce.machine.logic.module;
+package com.follarce.machine.CPU.ALU.module;
 
 public class shifter64B {
     public static boolean[] module(boolean[] in, boolean[] shift) {
@@ -13,7 +13,7 @@ public class shifter64B {
 
     private static boolean[] shift1(boolean[] in, boolean sel) {
         boolean[] out = new boolean[64];
-        out[0] = mux2to1.module(false, in[0], sel);
+        out[0] = mux2to1.module(in[0], false, sel);
         out[1] = mux2to1.module(in[1], in[0], sel);
         out[2] = mux2to1.module(in[2], in[1], sel);
         out[3] = mux2to1.module(in[3], in[2], sel);
@@ -82,8 +82,8 @@ public class shifter64B {
 
     private static boolean[] shift2(boolean[] in, boolean sel) {
         boolean[] out = new boolean[64];
-        out[0] = mux2to1.module(false, in[0], sel);
-        out[1] = mux2to1.module(false, in[1], sel);
+        out[0] = mux2to1.module(in[0], false, sel);
+        out[1] = mux2to1.module(in[1], false, sel);
         out[2] = mux2to1.module(in[2], in[0], sel);
         out[3] = mux2to1.module(in[3], in[1], sel);
         out[4] = mux2to1.module(in[4], in[2], sel);
@@ -151,10 +151,10 @@ public class shifter64B {
 
     private static boolean[] shift4(boolean[] in, boolean sel) {
         boolean[] out = new boolean[64];
-        out[0] = mux2to1.module(false, in[0], sel);
-        out[1] = mux2to1.module(false, in[1], sel);
-        out[2] = mux2to1.module(false, in[2], sel);
-        out[3] = mux2to1.module(false, in[3], sel);
+        out[0] = mux2to1.module(in[0], false, sel);
+        out[1] = mux2to1.module(in[1], false, sel);
+        out[2] = mux2to1.module(in[2], false, sel);
+        out[3] = mux2to1.module(in[3], false, sel);
         out[4] = mux2to1.module(in[4], in[0], sel);
         out[5] = mux2to1.module(in[5], in[1], sel);
         out[6] = mux2to1.module(in[6], in[2], sel);
@@ -220,14 +220,14 @@ public class shifter64B {
 
     private static boolean[] shift8(boolean[] in, boolean sel) {
         boolean[] out = new boolean[64];
-        out[0] = mux2to1.module(false, in[0], sel);
-        out[1] = mux2to1.module(false, in[1], sel);
-        out[2] = mux2to1.module(false, in[2], sel);
-        out[3] = mux2to1.module(false, in[3], sel);
-        out[4] = mux2to1.module(false, in[4], sel);
-        out[5] = mux2to1.module(false, in[5], sel);
-        out[6] = mux2to1.module(false, in[6], sel);
-        out[7] = mux2to1.module(false, in[7], sel);
+        out[0] = mux2to1.module(in[0], false, sel);
+        out[1] = mux2to1.module(in[1], false, sel);
+        out[2] = mux2to1.module(in[2], false, sel);
+        out[3] = mux2to1.module(in[3], false, sel);
+        out[4] = mux2to1.module(in[4], false, sel);
+        out[5] = mux2to1.module(in[5], false, sel);
+        out[6] = mux2to1.module(in[6], false, sel);
+        out[7] = mux2to1.module(in[7], false, sel);
         out[8] = mux2to1.module(in[8], in[0], sel);
         out[9] = mux2to1.module(in[9], in[1], sel);
         out[10] = mux2to1.module(in[10], in[2], sel);
@@ -289,22 +289,22 @@ public class shifter64B {
 
     private static boolean[] shift16(boolean[] in, boolean sel) {
         boolean[] out = new boolean[64];
-        out[0] = mux2to1.module(false, in[0], sel);
-        out[1] = mux2to1.module(false, in[1], sel);
-        out[2] = mux2to1.module(false, in[2], sel);
-        out[3] = mux2to1.module(false, in[3], sel);
-        out[4] = mux2to1.module(false, in[4], sel);
-        out[5] = mux2to1.module(false, in[5], sel);
-        out[6] = mux2to1.module(false, in[6], sel);
-        out[7] = mux2to1.module(false, in[7], sel);
-        out[8] = mux2to1.module(false, in[8], sel);
-        out[9] = mux2to1.module(false, in[9], sel);
-        out[10] = mux2to1.module(false, in[10], sel);
-        out[11] = mux2to1.module(false, in[11], sel);
-        out[12] = mux2to1.module(false, in[12], sel);
-        out[13] = mux2to1.module(false, in[13], sel);
-        out[14] = mux2to1.module(false, in[14], sel);
-        out[15] = mux2to1.module(false, in[15], sel);
+        out[0] = mux2to1.module(in[0], false, sel);
+        out[1] = mux2to1.module(in[1], false, sel);
+        out[2] = mux2to1.module(in[2], false, sel);
+        out[3] = mux2to1.module(in[3], false, sel);
+        out[4] = mux2to1.module(in[4], false, sel);
+        out[5] = mux2to1.module(in[5], false, sel);
+        out[6] = mux2to1.module(in[6], false, sel);
+        out[7] = mux2to1.module(in[7], false, sel);
+        out[8] = mux2to1.module(in[8], false, sel);
+        out[9] = mux2to1.module(in[9], false, sel);
+        out[10] = mux2to1.module(in[10], false, sel);
+        out[11] = mux2to1.module(in[11], false, sel);
+        out[12] = mux2to1.module(in[12], false, sel);
+        out[13] = mux2to1.module(in[13], false, sel);
+        out[14] = mux2to1.module(in[14], false, sel);
+        out[15] = mux2to1.module(in[15], false, sel);
         out[16] = mux2to1.module(in[16], in[0], sel);
         out[17] = mux2to1.module(in[17], in[1], sel);
         out[18] = mux2to1.module(in[18], in[2], sel);
@@ -358,38 +358,38 @@ public class shifter64B {
 
     private static boolean[] shift32(boolean[] in, boolean sel) {
         boolean[] out = new boolean[64];
-        out[0] = mux2to1.module(false, in[0], sel);
-        out[1] = mux2to1.module(false, in[1], sel);
-        out[2] = mux2to1.module(false, in[2], sel);
-        out[3] = mux2to1.module(false, in[3], sel);
-        out[4] = mux2to1.module(false, in[4], sel);
-        out[5] = mux2to1.module(false, in[5], sel);
-        out[6] = mux2to1.module(false, in[6], sel);
-        out[7] = mux2to1.module(false, in[7], sel);
-        out[8] = mux2to1.module(false, in[8], sel);
-        out[9] = mux2to1.module(false, in[9], sel);
-        out[10] = mux2to1.module(false, in[10], sel);
-        out[11] = mux2to1.module(false, in[11], sel);
-        out[12] = mux2to1.module(false, in[12], sel);
-        out[13] = mux2to1.module(false, in[13], sel);
-        out[14] = mux2to1.module(false, in[14], sel);
-        out[15] = mux2to1.module(false, in[15], sel);
-        out[16] = mux2to1.module(false, in[16], sel);
-        out[17] = mux2to1.module(false, in[17], sel);
-        out[18] = mux2to1.module(false, in[18], sel);
-        out[19] = mux2to1.module(false, in[19], sel);
-        out[20] = mux2to1.module(false, in[20], sel);
-        out[21] = mux2to1.module(false, in[21], sel);
-        out[22] = mux2to1.module(false, in[22], sel);
-        out[23] = mux2to1.module(false, in[23], sel);
-        out[24] = mux2to1.module(false, in[24], sel);
-        out[25] = mux2to1.module(false, in[25], sel);
-        out[26] = mux2to1.module(false, in[26], sel);
-        out[27] = mux2to1.module(false, in[27], sel);
-        out[28] = mux2to1.module(false, in[28], sel);
-        out[29] = mux2to1.module(false, in[29], sel);
-        out[30] = mux2to1.module(false, in[30], sel);
-        out[31] = mux2to1.module(false, in[31], sel);
+        out[0] = mux2to1.module(in[0], false, sel);
+        out[1] = mux2to1.module(in[1], false, sel);
+        out[2] = mux2to1.module(in[2], false, sel);
+        out[3] = mux2to1.module(in[3], false, sel);
+        out[4] = mux2to1.module(in[4], false, sel);
+        out[5] = mux2to1.module(in[5], false, sel);
+        out[6] = mux2to1.module(in[6], false, sel);
+        out[7] = mux2to1.module(in[7], false, sel);
+        out[8] = mux2to1.module(in[8], false, sel);
+        out[9] = mux2to1.module(in[9], false, sel);
+        out[10] = mux2to1.module(in[10], false, sel);
+        out[11] = mux2to1.module(in[11], false, sel);
+        out[12] = mux2to1.module(in[12], false, sel);
+        out[13] = mux2to1.module(in[13], false, sel);
+        out[14] = mux2to1.module(in[14], false, sel);
+        out[15] = mux2to1.module(in[15], false, sel);
+        out[16] = mux2to1.module(in[16], false, sel);
+        out[17] = mux2to1.module(in[17], false, sel);
+        out[18] = mux2to1.module(in[18], false, sel);
+        out[19] = mux2to1.module(in[19], false, sel);
+        out[20] = mux2to1.module(in[20], false, sel);
+        out[21] = mux2to1.module(in[21], false, sel);
+        out[22] = mux2to1.module(in[22], false, sel);
+        out[23] = mux2to1.module(in[23], false, sel);
+        out[24] = mux2to1.module(in[24], false, sel);
+        out[25] = mux2to1.module(in[25], false, sel);
+        out[26] = mux2to1.module(in[26], false, sel);
+        out[27] = mux2to1.module(in[27], false, sel);
+        out[28] = mux2to1.module(in[28], false, sel);
+        out[29] = mux2to1.module(in[29], false, sel);
+        out[30] = mux2to1.module(in[30], false, sel);
+        out[31] = mux2to1.module(in[31], false, sel);
         out[32] = mux2to1.module(in[32], in[0], sel);
         out[33] = mux2to1.module(in[33], in[1], sel);
         out[34] = mux2to1.module(in[34], in[2], sel);

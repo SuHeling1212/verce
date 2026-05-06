@@ -1,4 +1,4 @@
-package com.follarce.machine.logic.module;
+package com.follarce.machine.CPU.ALU.module;
 
 public class multiplier64B {
     public static boolean[] module(boolean[] a, boolean[] b) {

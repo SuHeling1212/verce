@@ -1,4 +1,4 @@
-package com.follarce.machine.logic.module;
+package com.follarce.machine.CPU.ALU.module;
 
 import com.follarce.machine.logic.gate.*;
 
