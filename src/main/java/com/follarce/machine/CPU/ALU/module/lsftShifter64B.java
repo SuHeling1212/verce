@@ -1,6 +1,6 @@
 package com.follarce.machine.CPU.ALU.module;
 
-public class shifter64B {
+public class lsftShifter64B {
     public static boolean[] module(boolean[] in, boolean[] shift) {
         boolean[] s0 = shift1(in, shift[0]);
         boolean[] s1 = shift2(s0, shift[1]);

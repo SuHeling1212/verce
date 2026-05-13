@@ -5,7 +5,7 @@ public class adder128B {
         return moduleWithCarry(a, b, false);
     }
 
-    public static boolean[] moduleWithCarry(boolean[] a, boolean[] b, boolean carryIn) {
+    private static boolean[] moduleWithCarry(boolean[] a, boolean[] b, boolean carryIn) {
         boolean[] result = new boolean[129];
 
         // 拆分成低64位和高64位（完全展开）

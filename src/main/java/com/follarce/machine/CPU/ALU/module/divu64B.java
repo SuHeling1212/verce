@@ -2,9 +2,9 @@ package com.follarce.machine.CPU.ALU.module;
 
 import com.follarce.machine.logic.gate.*;
 
-public class divider64B {
+public class divu64B {
 
-    public static boolean[] divu(boolean[] dividend, boolean[] divisor) {
+    public static boolean[] module(boolean[] dividend, boolean[] divisor) {
         boolean[] R = zeros64();
         boolean[] Q = copy64(dividend);
 

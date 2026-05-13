@@ -1,199 +1,237 @@
 package com.follarce;
 
-import com.follarce.machine.CPU.ALU.module.*;
+import com.follarce.machine.CPU.ALU.ALU;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("===== ALU Module Test =====\n");
-
-        testHalfAdder();
-        testFullAdder();
-        testAdder64B();
-        testAdder128B();
-        testSubtractor64B();
-        testComparator64B();
-        testShifter64B();
-        testMux2to1();
-        testMultiplier64B();
-        testDivider64B();
-
-        System.out.println("\n===== All tests completed =====");
+        System.out.println("=== RV64 ALU 测试开始 ===\n");
+        
+        testBasicOperations();
+        testMExtension();
+        test32BitOperations();
+        testEdgeCases();
+        
+        System.out.println("\n=== 所有测试完成 ===");
     }
-
-    static void testHalfAdder() {
-        System.out.println("--- halfAdder test ---");
-        boolean[] result = halfAdder.module(false, false);
-        System.out.println("0 + 0 = " + (result[0] ? 1 : 0) + ", carry = " + (result[1] ? 1 : 0));
-
-        result = halfAdder.module(true, false);
-        System.out.println("1 + 0 = " + (result[0] ? 1 : 0) + ", carry = " + (result[1] ? 1 : 0));
-
-        result = halfAdder.module(true, true);
-        System.out.println("1 + 1 = " + (result[0] ? 1 : 0) + ", carry = " + (result[1] ? 1 : 0));
+    
+    private static void testBasicOperations() {
+        System.out.println("【测试1：基础64位运算】");
+        
+        boolean[] a = createNumber(42);
+        boolean[] b = createNumber(13);
+        
+        boolean[] funct3 = new boolean[3];
+        boolean[] funct7 = new boolean[7];
+        boolean[] opcode = createOpcode(0x33);
+        
+        boolean[] result;
+        
+        result = testOperation("ADD", a, b, funct3, funct7, opcode, 0, 0x00);
+        printResult("ADD", 42, 13, result);
+        
+        result = testOperation("SUB", a, b, funct3, funct7, opcode, 0, 0x20);
+        printResult("SUB", 42, 13, result);
+        
+        result = testOperation("AND", a, b, funct3, funct7, opcode, 7, 0x00);
+        printResult("AND", 42, 13, result);
+        
+        result = testOperation("OR", a, b, funct3, funct7, opcode, 6, 0x00);
+        printResult("OR", 42, 13, result);
+        
+        result = testOperation("XOR", a, b, funct3, funct7, opcode, 4, 0x00);
+        printResult("XOR", 42, 13, result);
+        
         System.out.println();
     }
-
-    static void testFullAdder() {
-        System.out.println("--- fullAdder test ---");
-        boolean[] result = fullAdder.module(false, false, false);
-        System.out.println("0 + 0 + 0 = " + (result[0] ? 1 : 0) + ", carry = " + (result[1] ? 1 : 0));
-
-        result = fullAdder.module(true, true, false);
-        System.out.println("1 + 1 + 0 = " + (result[0] ? 1 : 0) + ", carry = " + (result[1] ? 1 : 0));
-
-        result = fullAdder.module(true, true, true);
-        System.out.println("1 + 1 + 1 = " + (result[0] ? 1 : 0) + ", carry = " + (result[1] ? 1 : 0));
+    
+    private static void testMExtension() {
+        System.out.println("【测试2：M扩展乘除法】");
+        
+        boolean[] a = createNumber(123);
+        boolean[] b = createNumber(456);
+        
+        boolean[] funct3 = new boolean[3];
+        boolean[] funct7 = new boolean[7];
+        boolean[] opcode = createOpcode(0x33);
+        
+        boolean[] result;
+        
+        result = testOperation("MUL", a, b, funct3, funct7, opcode, 0, 0x01);
+        printResult("MUL", 123, 456, result);
+        
+        result = testOperation("DIV", a, b, funct3, funct7, opcode, 4, 0x01);
+        printResult("DIV", 123, 456, result);
+        
+        result = testOperation("DIVU", a, b, funct3, funct7, opcode, 5, 0x01);
+        printResult("DIVU", 123, 456, result);
+        
+        result = testOperation("REM", a, b, funct3, funct7, opcode, 6, 0x01);
+        printResult("REM", 123, 456, result);
+        
         System.out.println();
     }
-
-    static void testAdder64B() {
-        System.out.println("--- adder64B test ---");
-        boolean[] a = new boolean[64];
-        boolean[] b = new boolean[64];
-        a[0] = true;
-        b[0] = true;
-        boolean[] result = adder64B.module(a, b);
-        System.out.println("1 + 1 (64-bit) = bit0:" + (result[0] ? 1 : 0) + " bit1:" + (result[1] ? 1 : 0) + " carry:" + result[64]);
-
-        a = new boolean[64];
-        b = new boolean[64];
-        a[0] = true;
-        b[1] = true;
-        result = adder64B.module(a, b);
-        System.out.println("1 + 2 (64-bit) = bit0:" + (result[0] ? 1 : 0) + " bit1:" + (result[1] ? 1 : 0) + " carry:" + result[64]);
+    
+    private static void test32BitOperations() {
+        System.out.println("【测试3：32位运算】");
+        
+        boolean[] a = createNumber(100);
+        boolean[] b = createNumber(25);
+        
+        boolean[] funct3 = new boolean[3];
+        boolean[] funct7 = new boolean[7];
+        boolean[] opcode = createOpcode(0x3B);
+        
+        boolean[] result;
+        
+        System.out.println("  调试: opcode = " + opcodeToString(opcode));
+        
+        result = testOperation("ADDW", a, b, funct3, funct7, opcode, 0, 0x00);
+        printResult("ADDW", 100, 25, result);
+        
+        result = testOperation("SUBW", a, b, funct3, funct7, opcode, 0, 0x20);
+        printResult("SUBW", 100, 25, result);
+        
+        result = testOperation("SLLW", a, b, funct3, funct7, opcode, 1, 0x00);
+        printResult("SLLW", 100, 25, result);
+        
+        result = testOperation("SRLW", a, b, funct3, funct7, opcode, 5, 0x00);
+        printResult("SRLW", 100, 25, result);
+        
         System.out.println();
     }
-
-    static void testAdder128B() {
-        System.out.println("--- adder128B test ---");
-        boolean[] a = new boolean[128];
-        boolean[] b = new boolean[128];
-        a[0] = true;
-        b[0] = true;
-        boolean[] result = adder128B.module(a, b);
-        System.out.println("1 + 1 (128-bit) = bit0:" + (result[0] ? 1 : 0) + " bit1:" + (result[1] ? 1 : 0) + " bit64:" + result[64] + " carry:" + result[128]);
-
-        a = new boolean[128];
-        b = new boolean[128];
+    
+    private static void testEdgeCases() {
+        System.out.println("【测试4：边界情况】");
+        
+        boolean[] zero = createNumber(0);
+        boolean[] one = createNumber(1);
+        boolean[] max = createMaxNumber();
+        
+        boolean[] funct3 = new boolean[3];
+        boolean[] funct7 = new boolean[7];
+        boolean[] opcode = createOpcode(0x33);
+        
+        boolean[] result;
+        
+        result = testOperation("ADD (0+1)", zero, one, funct3, funct7, opcode, 0, 0x00);
+        printResult("ADD", 0, 1, result);
+        
+        result = testOperation("AND (max&1)", max, one, funct3, funct7, opcode, 7, 0x00);
+        printResult("AND", -1, 1, result);
+        
+        result = testOperation("OR (0|max)", zero, max, funct3, funct7, opcode, 6, 0x00);
+        printResult("OR", 0, -1, result);
+        
+        System.out.println();
+    }
+    
+    private static boolean[] testOperation(String name, boolean[] a, boolean[] b, 
+                                          boolean[] funct3, boolean[] funct7, 
+                                          boolean[] opcode, int f3, int f7) {
+        setFunct3(funct3, f3);
+        setFunct7(funct7, f7);
+        System.out.println("  调试: " + name + " funct3=" + f3 + " funct7=" + f7);
+        return ALU.execute(a, b, funct3, funct7, opcode);
+    }
+    
+    private static boolean[] createNumber(long value) {
+        boolean[] result = new boolean[64];
         for (int i = 0; i < 64; i++) {
-            a[i] = true;
-            b[i] = true;
+            result[i] = ((value >> i) & 1) == 1;
         }
-        result = adder128B.module(a, b);
-        System.out.println("2^64-1 + 2^64-1 (128-bit) = bit0:" + (result[0] ? 1 : 0) + " bit1:" + (result[1] ? 1 : 0) + " bit63:" + (result[63] ? 1 : 0) + " bit64:" + result[64] + " carry:" + result[128]);
-        System.out.println();
+        return result;
     }
-
-    static void testSubtractor64B() {
-        System.out.println("--- subtractor64B test ---");
-        boolean[] a = new boolean[64];
-        boolean[] b = new boolean[64];
-        a[1] = true;
-        b[0] = true;
-        boolean[] result = subtractor64B.module(a, b);
-        System.out.println("2 - 1 (64-bit) = bit0:" + (result[0] ? 1 : 0) + " bit1:" + (result[1] ? 1 : 0));
-        System.out.println();
+    
+    private static boolean[] createMaxNumber() {
+        boolean[] result = new boolean[64];
+        for (int i = 0; i < 64; i++) {
+            result[i] = true;
+        }
+        return result;
     }
-
-    static void testComparator64B() {
-        System.out.println("--- comparator64B test ---");
-        boolean[] a = new boolean[64];
-        boolean[] b = new boolean[64];
-        a[1] = true;
-        b[0] = true;
-        System.out.println("unsigned: 2 < 1? " + unsignedComparator64B.module(a, b));
-        System.out.println("signed: 2 < 1? " + signedComparator64B.module(a, b));
-
-        a = new boolean[64];
-        b = new boolean[64];
-        a[0] = true;
-        b[1] = true;
-        System.out.println("unsigned: 1 < 2? " + unsignedComparator64B.module(a, b));
-        System.out.println("signed: 1 < 2? " + signedComparator64B.module(a, b));
-        System.out.println();
+    
+    private static boolean[] createOpcode(int opcode) {
+        boolean[] result = new boolean[7];
+        for (int i = 0; i < 7; i++) {
+            result[i] = ((opcode >> i) & 1) == 1;
+        }
+        return result;
     }
-
-    static void testShifter64B() {
-        System.out.println("--- shifter64B test ---");
-        boolean[] in = new boolean[64];
-        in[0] = true;
-        boolean[] shift = new boolean[64];
-        shift[0] = true;
-        boolean[] result = shifter64B.module(in, shift);
-        System.out.println("shift 1 left by 1 = bit1:" + (result[1] ? 1 : 0));
-
-        shift = new boolean[64];
-        shift[1] = true;
-        result = shifter64B.module(in, shift);
-        System.out.println("shift 1 left by 2 = bit2:" + (result[2] ? 1 : 0));
-        System.out.println();
+    
+    private static void setFunct3(boolean[] funct3, int value) {
+        funct3[0] = ((value >> 0) & 1) == 1;
+        funct3[1] = ((value >> 1) & 1) == 1;
+        funct3[2] = ((value >> 2) & 1) == 1;
     }
-
-    static void testMux2to1() {
-        System.out.println("--- mux2to1 test ---");
-        System.out.println("sel=0, a=false, b=true  -> " + mux2to1.module(false, true, false));
-        System.out.println("sel=1, a=false, b=true  -> " + mux2to1.module(false, true, true));
-        System.out.println("sel=0, a=true, b=false  -> " + mux2to1.module(true, false, false));
-        System.out.println("sel=1, a=true, b=false  -> " + mux2to1.module(true, false, true));
-        System.out.println();
+    
+    private static void setFunct7(boolean[] funct7, int value) {
+        for (int i = 0; i < 7; i++) {
+            funct7[i] = ((value >> i) & 1) == 1;
+        }
     }
-
-    static void testMultiplier64B() {
-        System.out.println("--- multiplier64B test ---");
-        boolean[] a = new boolean[64];
-        boolean[] b = new boolean[64];
-        a[0] = true;
-        b[1] = true;
-        boolean[] result = multiplier64B.module(a, b);
-        System.out.println("1 * 2 (64-bit) = bit0:" + (result[0] ? 1 : 0) + " bit1:" + (result[1] ? 1 : 0));
-        System.out.println();
+    
+    private static void printResult(String op, long a, long b, boolean[] result) {
+        long value = booleanArrayToLong(result);
+        System.out.println(String.format("  %s: %d %s %d = %d (0x%X)", 
+            op, a, getOperatorSymbol(op), b, value, value));
     }
-
-    static void testDivider64B() {
-        System.out.println("--- divider64B test ---");
-        
-        // Test 6 / 2 = 3
-        boolean[] dividend = new boolean[64];
-        boolean[] divisor = new boolean[64];
-        dividend[1] = true; dividend[2] = true; // 6 = 110b
-        divisor[1] = true; // 2 = 10b
-        boolean[] result = divider64B.divu(dividend, divisor);
-        System.out.println("6 / 2 (64-bit): quotient=" + bitsToInt(result, 0, 64) + " remainder=" + bitsToInt(result, 64, 64));
-
-        // Test 10 / 3 = 3 R 1
-        dividend = new boolean[64];
-        divisor = new boolean[64];
-        dividend[1] = true; dividend[3] = true; // 10 = 1010b
-        divisor[0] = true; divisor[1] = true; // 3 = 11b
-        result = divider64B.divu(dividend, divisor);
-        System.out.println("10 / 3 (64-bit): quotient=" + bitsToInt(result, 0, 64) + " remainder=" + bitsToInt(result, 64, 64));
-
-        // Test 15 / 5 = 3 R 0
-        dividend = new boolean[64];
-        divisor = new boolean[64];
-        dividend[0] = true; dividend[1] = true; dividend[2] = true; dividend[3] = true; // 15 = 1111b
-        divisor[0] = true; divisor[2] = true; // 5 = 101b
-        result = divider64B.divu(dividend, divisor);
-        System.out.println("15 / 5 (64-bit): quotient=" + bitsToInt(result, 0, 64) + " remainder=" + bitsToInt(result, 64, 64));
-
-        // Test 100 / 7 = 14 R 2
-        dividend = new boolean[64];
-        divisor = new boolean[64];
-        dividend[2] = true; dividend[5] = true; dividend[6] = true; // 100 = 1100100b
-        divisor[0] = true; divisor[1] = true; divisor[2] = true; // 7 = 111b
-        result = divider64B.divu(dividend, divisor);
-        System.out.println("100 / 7 (64-bit): quotient=" + bitsToInt(result, 0, 64) + " remainder=" + bitsToInt(result, 64, 64));
-        
-        System.out.println();
-    }
-
-    static long bitsToInt(boolean[] bits, int offset, int len) {
+    
+    private static long booleanArrayToLong(boolean[] arr) {
         long result = 0;
-        for (int i = 0; i < len && i < 64; i++) {
-            if (bits[offset + i]) {
+        for (int i = 0; i < 64; i++) {
+            if (arr[i]) {
                 result |= (1L << i);
             }
         }
         return result;
+    }
+    
+    private static String opcodeToString(boolean[] opcode) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 6; i >= 0; i--) {
+            sb.append(opcode[i] ? '1' : '0');
+        }
+        return sb.toString();
+    }
+    
+    private static String getOperatorSymbol(String op) {
+        switch (op) {
+            case "ADD":
+            case "ADDW":
+                return "+";
+            case "SUB":
+            case "SUBW":
+                return "-";
+            case "AND":
+                return "&";
+            case "OR":
+                return "|";
+            case "XOR":
+                return "^";
+            case "MUL":
+            case "MULW":
+                return "*";
+            case "DIV":
+            case "DIVU":
+            case "DIVW":
+            case "DIVUW":
+                return "/";
+            case "REM":
+            case "REMU":
+            case "REMW":
+            case "REMUW":
+                return "%";
+            case "SLL":
+            case "SLLW":
+                return "<<";
+            case "SRL":
+            case "SRLW":
+                return ">>>";
+            case "SRA":
+            case "SRAW":
+                return ">>";
+            default:
+                return "?";
+        }
     }
 }

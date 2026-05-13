@@ -1,0 +1,74 @@
+package com.follarce.machine.CPU.ALU.module;
+
+import com.follarce.machine.logic.gate.not;
+
+public class not64B {
+    public static boolean[] module(boolean[] a) {
+        boolean[] result = new boolean[64];
+        result[0] = not.gate(a[0]);
+        result[1] = not.gate(a[1]);
+        result[2] = not.gate(a[2]);
+        result[3] = not.gate(a[3]);
+        result[4] = not.gate(a[4]);
+        result[5] = not.gate(a[5]);
+        result[6] = not.gate(a[6]);
+        result[7] = not.gate(a[7]);
+        result[8] = not.gate(a[8]);
+        result[9] = not.gate(a[9]);
+        result[10] = not.gate(a[10]);
+        result[11] = not.gate(a[11]);
+        result[12] = not.gate(a[12]);
+        result[13] = not.gate(a[13]);
+        result[14] = not.gate(a[14]);
+        result[15] = not.gate(a[15]);
+        result[16] = not.gate(a[16]);
+        result[17] = not.gate(a[17]);
+        result[18] = not.gate(a[18]);
+        result[19] = not.gate(a[19]);
+        result[20] = not.gate(a[20]);
+        result[21] = not.gate(a[21]);
+        result[22] = not.gate(a[22]);
+        result[23] = not.gate(a[23]);
+        result[24] = not.gate(a[24]);
+        result[25] = not.gate(a[25]);
+        result[26] = not.gate(a[26]);
+        result[27] = not.gate(a[27]);
+        result[28] = not.gate(a[28]);
+        result[29] = not.gate(a[29]);
+        result[30] = not.gate(a[30]);
+        result[31] = not.gate(a[31]);
+        result[32] = not.gate(a[32]);
+        result[33] = not.gate(a[33]);
+        result[34] = not.gate(a[34]);
+        result[35] = not.gate(a[35]);
+        result[36] = not.gate(a[36]);
+        result[37] = not.gate(a[37]);
+        result[38] = not.gate(a[38]);
+        result[39] = not.gate(a[39]);
+        result[40] = not.gate(a[40]);
+        result[41] = not.gate(a[41]);
+        result[42] = not.gate(a[42]);
+        result[43] = not.gate(a[43]);
+        result[44] = not.gate(a[44]);
+        result[45] = not.gate(a[45]);
+        result[46] = not.gate(a[46]);
+        result[47] = not.gate(a[47]);
+        result[48] = not.gate(a[48]);
+        result[49] = not.gate(a[49]);
+        result[50] = not.gate(a[50]);
+        result[51] = not.gate(a[51]);
+        result[52] = not.gate(a[52]);
+        result[53] = not.gate(a[53]);
+        result[54] = not.gate(a[54]);
+        result[55] = not.gate(a[55]);
+        result[56] = not.gate(a[56]);
+        result[57] = not.gate(a[57]);
+        result[58] = not.gate(a[58]);
+        result[59] = not.gate(a[59]);
+        result[60] = not.gate(a[60]);
+        result[61] = not.gate(a[61]);
+        result[62] = not.gate(a[62]);
+        result[63] = not.gate(a[63]);
+        return result;
+    }
+}

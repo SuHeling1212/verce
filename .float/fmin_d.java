@@ -1,0 +1,104 @@
+package com.follarce.machine.CPU.ALU.module.float;
+
+import com.follarce.machine.logic.gate.and;
+import com.follarce.machine.logic.gate.not;
+import com.follarce.machine.logic.gate.or;
+
+public class fmin_d {
+    public static boolean[] module(boolean[] a, boolean[] b) {
+        boolean[] ltResult = flt_d.module(a, b);
+        boolean aLessThanB = ltResult[0];
+        boolean eitherNaN = or.gate(isNaN_d.module(a), isNaN_d.module(b));
+        
+        boolean[] nanResult = makeQuietNaN64();
+        boolean[] normalResult = mux64B(b, a, aLessThanB);
+        
+        return mux64B(normalResult, nanResult, eitherNaN);
+    }
+    
+    private static boolean[] mux64B(boolean[] a, boolean[] b, boolean sel) {
+        boolean[] result = new boolean[64];
+        result[0] = mux2to1.module(a[0], b[0], sel);
+        result[1] = mux2to1.module(a[1], b[1], sel);
+        result[2] = mux2to1.module(a[2], b[2], sel);
+        result[3] = mux2to1.module(a[3], b[3], sel);
+        result[4] = mux2to1.module(a[4], b[4], sel);
+        result[5] = mux2to1.module(a[5], b[5], sel);
+        result[6] = mux2to1.module(a[6], b[6], sel);
+        result[7] = mux2to1.module(a[7], b[7], sel);
+        result[8] = mux2to1.module(a[8], b[8], sel);
+        result[9] = mux2to1.module(a[9], b[9], sel);
+        result[10] = mux2to1.module(a[10], b[10], sel);
+        result[11] = mux2to1.module(a[11], b[11], sel);
+        result[12] = mux2to1.module(a[12], b[12], sel);
+        result[13] = mux2to1.module(a[13], b[13], sel);
+        result[14] = mux2to1.module(a[14], b[14], sel);
+        result[15] = mux2to1.module(a[15], b[15], sel);
+        result[16] = mux2to1.module(a[16], b[16], sel);
+        result[17] = mux2to1.module(a[17], b[17], sel);
+        result[18] = mux2to1.module(a[18], b[18], sel);
+        result[19] = mux2to1.module(a[19], b[19], sel);
+        result[20] = mux2to1.module(a[20], b[20], sel);
+        result[21] = mux2to1.module(a[21], b[21], sel);
+        result[22] = mux2to1.module(a[22], b[22], sel);
+        result[23] = mux2to1.module(a[23], b[23], sel);
+        result[24] = mux2to1.module(a[24], b[24], sel);
+        result[25] = mux2to1.module(a[25], b[25], sel);
+        result[26] = mux2to1.module(a[26], b[26], sel);
+        result[27] = mux2to1.module(a[27], b[27], sel);
+        result[28] = mux2to1.module(a[28], b[28], sel);
+        result[29] = mux2to1.module(a[29], b[29], sel);
+        result[30] = mux2to1.module(a[30], b[30], sel);
+        result[31] = mux2to1.module(a[31], b[31], sel);
+        result[32] = mux2to1.module(a[32], b[32], sel);
+        result[33] = mux2to1.module(a[33], b[33], sel);
+        result[34] = mux2to1.module(a[34], b[34], sel);
+        result[35] = mux2to1.module(a[35], b[35], sel);
+        result[36] = mux2to1.module(a[36], b[36], sel);
+        result[37] = mux2to1.module(a[37], b[37], sel);
+        result[38] = mux2to1.module(a[38], b[38], sel);
+        result[39] = mux2to1.module(a[39], b[39], sel);
+        result[40] = mux2to1.module(a[40], b[40], sel);
+        result[41] = mux2to1.module(a[41], b[41], sel);
+        result[42] = mux2to1.module(a[42], b[42], sel);
+        result[43] = mux2to1.module(a[43], b[43], sel);
+        result[44] = mux2to1.module(a[44], b[44], sel);
+        result[45] = mux2to1.module(a[45], b[45], sel);
+        result[46] = mux2to1.module(a[46], b[46], sel);
+        result[47] = mux2to1.module(a[47], b[47], sel);
+        result[48] = mux2to1.module(a[48], b[48], sel);
+        result[49] = mux2to1.module(a[49], b[49], sel);
+        result[50] = mux2to1.module(a[50], b[50], sel);
+        result[51] = mux2to1.module(a[51], b[51], sel);
+        result[52] = mux2to1.module(a[52], b[52], sel);
+        result[53] = mux2to1.module(a[53], b[53], sel);
+        result[54] = mux2to1.module(a[54], b[54], sel);
+        result[55] = mux2to1.module(a[55], b[55], sel);
+        result[56] = mux2to1.module(a[56], b[56], sel);
+        result[57] = mux2to1.module(a[57], b[57], sel);
+        result[58] = mux2to1.module(a[58], b[58], sel);
+        result[59] = mux2to1.module(a[59], b[59], sel);
+        result[60] = mux2to1.module(a[60], b[60], sel);
+        result[61] = mux2to1.module(a[61], b[61], sel);
+        result[62] = mux2to1.module(a[62], b[62], sel);
+        result[63] = mux2to1.module(a[63], b[63], sel);
+        return result;
+    }
+    
+    private static boolean[] makeQuietNaN64() {
+        boolean[] result = new boolean[64];
+        result[51] = true;
+        result[52] = true;
+        result[53] = true;
+        result[54] = true;
+        result[55] = true;
+        result[56] = true;
+        result[57] = true;
+        result[58] = true;
+        result[59] = true;
+        result[60] = true;
+        result[61] = true;
+        result[62] = true;
+        return result;
+    }
+}
