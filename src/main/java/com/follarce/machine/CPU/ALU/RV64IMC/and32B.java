@@ -1,0 +1,42 @@
+package com.follarce.machine.CPU.ALU.RV64IMC;
+
+import com.follarce.machine.logic.gate.and;
+
+public class and32B {
+    public static boolean[] module(boolean[] a, boolean[] b) {
+        boolean[] result = new boolean[32];
+        result[0] = and.gate(a[0], b[0]);
+        result[1] = and.gate(a[1], b[1]);
+        result[2] = and.gate(a[2], b[2]);
+        result[3] = and.gate(a[3], b[3]);
+        result[4] = and.gate(a[4], b[4]);
+        result[5] = and.gate(a[5], b[5]);
+        result[6] = and.gate(a[6], b[6]);
+        result[7] = and.gate(a[7], b[7]);
+        result[8] = and.gate(a[8], b[8]);
+        result[9] = and.gate(a[9], b[9]);
+        result[10] = and.gate(a[10], b[10]);
+        result[11] = and.gate(a[11], b[11]);
+        result[12] = and.gate(a[12], b[12]);
+        result[13] = and.gate(a[13], b[13]);
+        result[14] = and.gate(a[14], b[14]);
+        result[15] = and.gate(a[15], b[15]);
+        result[16] = and.gate(a[16], b[16]);
+        result[17] = and.gate(a[17], b[17]);
+        result[18] = and.gate(a[18], b[18]);
+        result[19] = and.gate(a[19], b[19]);
+        result[20] = and.gate(a[20], b[20]);
+        result[21] = and.gate(a[21], b[21]);
+        result[22] = and.gate(a[22], b[22]);
+        result[23] = and.gate(a[23], b[23]);
+        result[24] = and.gate(a[24], b[24]);
+        result[25] = and.gate(a[25], b[25]);
+        result[26] = and.gate(a[26], b[26]);
+        result[27] = and.gate(a[27], b[27]);
+        result[28] = and.gate(a[28], b[28]);
+        result[29] = and.gate(a[29], b[29]);
+        result[30] = and.gate(a[30], b[30]);
+        result[31] = and.gate(a[31], b[31]);
+        return result;
+    }
+}

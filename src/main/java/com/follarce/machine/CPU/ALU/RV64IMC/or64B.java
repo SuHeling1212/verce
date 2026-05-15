@@ -1,0 +1,74 @@
+package com.follarce.machine.CPU.ALU.RV64IMC;
+
+import com.follarce.machine.logic.gate.or;
+
+public class or64B {
+    public static boolean[] module(boolean[] a, boolean[] b) {
+        boolean[] result = new boolean[64];
+        result[0] = or.gate(a[0], b[0]);
+        result[1] = or.gate(a[1], b[1]);
+        result[2] = or.gate(a[2], b[2]);
+        result[3] = or.gate(a[3], b[3]);
+        result[4] = or.gate(a[4], b[4]);
+        result[5] = or.gate(a[5], b[5]);
+        result[6] = or.gate(a[6], b[6]);
+        result[7] = or.gate(a[7], b[7]);
+        result[8] = or.gate(a[8], b[8]);
+        result[9] = or.gate(a[9], b[9]);
+        result[10] = or.gate(a[10], b[10]);
+        result[11] = or.gate(a[11], b[11]);
+        result[12] = or.gate(a[12], b[12]);
+        result[13] = or.gate(a[13], b[13]);
+        result[14] = or.gate(a[14], b[14]);
+        result[15] = or.gate(a[15], b[15]);
+        result[16] = or.gate(a[16], b[16]);
+        result[17] = or.gate(a[17], b[17]);
+        result[18] = or.gate(a[18], b[18]);
+        result[19] = or.gate(a[19], b[19]);
+        result[20] = or.gate(a[20], b[20]);
+        result[21] = or.gate(a[21], b[21]);
+        result[22] = or.gate(a[22], b[22]);
+        result[23] = or.gate(a[23], b[23]);
+        result[24] = or.gate(a[24], b[24]);
+        result[25] = or.gate(a[25], b[25]);
+        result[26] = or.gate(a[26], b[26]);
+        result[27] = or.gate(a[27], b[27]);
+        result[28] = or.gate(a[28], b[28]);
+        result[29] = or.gate(a[29], b[29]);
+        result[30] = or.gate(a[30], b[30]);
+        result[31] = or.gate(a[31], b[31]);
+        result[32] = or.gate(a[32], b[32]);
+        result[33] = or.gate(a[33], b[33]);
+        result[34] = or.gate(a[34], b[34]);
+        result[35] = or.gate(a[35], b[35]);
+        result[36] = or.gate(a[36], b[36]);
+        result[37] = or.gate(a[37], b[37]);
+        result[38] = or.gate(a[38], b[38]);
+        result[39] = or.gate(a[39], b[39]);
+        result[40] = or.gate(a[40], b[40]);
+        result[41] = or.gate(a[41], b[41]);
+        result[42] = or.gate(a[42], b[42]);
+        result[43] = or.gate(a[43], b[43]);
+        result[44] = or.gate(a[44], b[44]);
+        result[45] = or.gate(a[45], b[45]);
+        result[46] = or.gate(a[46], b[46]);
+        result[47] = or.gate(a[47], b[47]);
+        result[48] = or.gate(a[48], b[48]);
+        result[49] = or.gate(a[49], b[49]);
+        result[50] = or.gate(a[50], b[50]);
+        result[51] = or.gate(a[51], b[51]);
+        result[52] = or.gate(a[52], b[52]);
+        result[53] = or.gate(a[53], b[53]);
+        result[54] = or.gate(a[54], b[54]);
+        result[55] = or.gate(a[55], b[55]);
+        result[56] = or.gate(a[56], b[56]);
+        result[57] = or.gate(a[57], b[57]);
+        result[58] = or.gate(a[58], b[58]);
+        result[59] = or.gate(a[59], b[59]);
+        result[60] = or.gate(a[60], b[60]);
+        result[61] = or.gate(a[61], b[61]);
+        result[62] = or.gate(a[62], b[62]);
+        result[63] = or.gate(a[63], b[63]);
+        return result;
+    }
+}
