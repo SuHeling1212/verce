@@ -15,7 +15,7 @@ public class remu64B {
         boolean[] productLow64 = extractLow64(product128);
 
         // 计算余数 = dividend - productLow64
-        boolean[] remainder = subtractor64B.module(dividend, productLow64);
+        boolean[] remainder = extractLow64(subtractor64B.module(dividend, productLow64));
 
         return remainder;
     }
